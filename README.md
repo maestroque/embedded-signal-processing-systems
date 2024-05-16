@@ -1,1 +1,1 @@
-# embedded-signal-processing-systems
+# Embedded Signal Processing Systems
