@@ -63,4 +63,4 @@ if(rank(E2) < size(E2,2))
 end
 
 % clear eveything except the required answers
-%clearvars -EXCEPT a1 a2 V x U e;
+clearvars -EXCEPT a1 a2 V x U e;
