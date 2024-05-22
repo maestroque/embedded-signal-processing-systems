@@ -1,7 +1,7 @@
 clear;
 
 % Load the variables ....
-load("../data/data1.mat");
+load("data1.mat");
 
 % part a
 % ------
