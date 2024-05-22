@@ -1,5 +1,8 @@
 clear;
 
+% Load the variables ....
+load("data2.mat")
+
 % part a
 
 
@@ -9,11 +12,5 @@ clear;
 % part c
 
 
-% part d
-
-
-% part e
-
-
 % clear eveything except the required answers
-clearvars -EXCEPT U V A x b;
+clearvars -EXCEPT v B C;
