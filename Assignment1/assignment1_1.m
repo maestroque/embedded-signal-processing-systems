@@ -44,7 +44,10 @@ x = eigen_vectors(:, idx);
 x = x * (2 / norm(x));
 % part d
 % ------
-% not sure how to do this
+
+U = orth(null(D'));
+assert(round(norm(U'*U - eye(size(U,2)))) == 0, 'U is not orthogonal'); % check if U is orthonormal
+assert(round(norm(U'*D - zeros(size(D,2)))) == 0, 'U^H*D does not equal the zero matrix '); % check if U is orthogonal to D'
 
 % part e
 % ------
