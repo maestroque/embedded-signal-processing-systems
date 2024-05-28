@@ -34,22 +34,22 @@ assert(norm(A * v) / norm(v) > 5, '|Av|/|v| is less than 5');
 % ||Ax2||/||x2|| = 2
 
 
-% Desired singular values for B
-singular_values_B = [2, 1, 0]; % 
-
-% Construct the new diagonal matrix Sigma for B
-Sigma_B = diag(singular_values_B);
-
-% % Construct the matrix B
-% B = U * Sigma_B * V'; 
-% not sure how to do this...
 
 % part c
 % ------
-% CN(C) = 4;
-% Cmo
+% CN(C) = 4; ratio of biggest to lowest singular values
+%induced eucliean norm is ||C|| = 3, choose one singular value as 3.
+% Given rank =2 ; so two linearly independent columns
 
+% Singular values
+sigma1 = 3;
+sigma2 = 0.75;  %3 / 4;
+sigma3 = 0;
 
+Sigma = diag([sigma1, sigma2, sigma3]);
+U = orth(randn(3,3));
+V = orth(randn(3,3));
+C = U * Sigma * V;
 
 % clear eveything except the required answers
 clearvars -EXCEPT v B C;
