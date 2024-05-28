@@ -29,8 +29,18 @@ assert(round(norm(e3 - V)) < 1e-10, 'V is not correct');
 % part d
 
 
-% part e
 
+% part e
+b = zeros(size(A, 1), 1);
+y = pinv(A) * b;
+
+r = rand(size(A, 1), 1);
+r = r - A * (pinv(A) * r);
+r = r / norm(r);
+
+b = A * y + r;
+
+assert(round(norm(A * (pinv(A) * b) - b)) - 1 < 1e-10, 'b is not correct');
 
 % clear eveything except the required answers
 clearvars -EXCEPT U V A x b;
