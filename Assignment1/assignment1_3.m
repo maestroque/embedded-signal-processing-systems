@@ -27,8 +27,16 @@ assert(round(norm(e1 - U)) < 1e-10, 'U is not correct');
 assert(round(norm(e3 - V)) < 1e-10, 'V is not correct');
 
 % part d
-
-
+%using e1, e2 and e3 from above
+% to choose the vector x with induced norm ||Ax||/||x|| = root(13/2) 
+% = 2.549509; Will be a linear combination of the vectors corresponding to singular values 3 and 2
+x = e3(:,1)+e3(:,2);
+%checking if it meets the condition
+if(norm(A*x)/norm(x) - round(sqrt(13/2), 4) < 0.0001)
+   fprintf('the vector x meets the condition \n')
+else
+   fprintf('the vector x does not meet the condition \n')
+end
 
 % part e
 b = zeros(size(A, 1), 1);
