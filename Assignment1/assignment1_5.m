@@ -23,10 +23,11 @@ for i = 1:N
     E2 = E2 + norm(W2' * X2(:, i) - S2(:, i))^2;
 end
 
+% Calculate estiamte of A2
 Cov_X = 1 / N * X2 * X2';
-A2_hat = W2 / Cov_X;
+A2 = W2 / Cov_X;
 
-C2 = W2'*A2_hat - eye(3);
+C2 = W2'*A2 - eye(3);
 I2 = sum(sum(C2 .^ 2));
 
 % clear eveything except the required answers
