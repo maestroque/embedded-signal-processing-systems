@@ -30,9 +30,18 @@ assert(norm(A * v) / norm(v) > 5, '|Av|/|v| is less than 5');
 
 % part b
 % ------
-% induced-2 norm of A :- ||Ax1||/||x1|| = 1
-% ||Ax2||/||x2|| = 2
-
+% induced-2 norm of B :- ||Bx1||/||x1|| = 1
+% ||Bx2||/||x2|| = 2
+S_B = diag([2, 1, 0]);
+U_B = eye(3)
+V_B = eye(3)
+B = U_B * S_B *V_B;
+% checking if it meets the condition:
+x1 = V_B(:,2);
+x2 = V_B(:,1);
+% gives an error if it doesn't meet the condition
+assert(norm(B*x1)/norm(x1) == 1, 'induced norm of B is not correct(1)');
+assert(norm(B*x2)/norm(x2) == 2, 'induced norm of B is not correct(2)');
 
 
 % part c
