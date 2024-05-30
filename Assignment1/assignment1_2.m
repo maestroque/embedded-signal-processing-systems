@@ -13,21 +13,6 @@ v = 0.6 * V(:, 1);
 assert(norm(v) <= 1, 'Norm of v is greater than 1');
 assert(norm(A * v) / norm(v) > 5, '|Av|/|v| is less than 5');
 
-% v_found = false;
-% for attempts=1:1000
-%     v_t = randn(3,1);
-%     v_t = v_t / norm(v_t);
-%     norm_v = norm(v_t);
-%     norm_Av = norm(A*v_t);
-% 
-%     % Check if v meets the condition
-%     if norm_v <= 1 && norm_Av > 5
-%         v_found = true;
-%         v = v_t;
-%         break;
-%     end
-% end
-
 % part b
 % ------
 % induced-2 norm of B :- ||Bx1||/||x1|| = 1
