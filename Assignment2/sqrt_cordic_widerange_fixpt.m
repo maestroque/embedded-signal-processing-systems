@@ -14,9 +14,9 @@ function y = sqrt_cordic_widerange_fixpt(v, N, DAT_BW, DAT_FL, DAT_S, F)
     end
 
     if v > 2
-        v_fixpt = bitsrl(v_fixpt, num_leading_zeros);
+        v_fixpt = bitsra(v_fixpt, num_leading_zeros);
     elseif v < 0.5
-        v_fixpt = bitsll(v_fixpt, num_leading_zeros);
+        v_fixpt = bitsra(v_fixpt, num_leading_zeros);
     end
 
     y = sqrt_cordic_fixpt(v_fixpt, N, DAT_BW, DAT_FL, DAT_S, F);
@@ -24,6 +24,6 @@ function y = sqrt_cordic_widerange_fixpt(v, N, DAT_BW, DAT_FL, DAT_S, F)
     if v > 2
         y = bitsll(y, num_leading_zeros / 2);
     elseif v < 0.5
-        y = bitsrl(y, num_leading_zeros / 2);
+        y = bitsll(y, num_leading_zeros / 2);
     end
 end
