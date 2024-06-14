@@ -1,9 +1,11 @@
+clear all;
+
 % testCordic_sqrt.m
 %
 % the following parameters define the fixed point representation of the
 % data variables in the computation of the square root
-DAT_BW = 12;   % the bit width of the data variables
-DAT_FL = 9;    % the fraction length of the data variables
+DAT_BW = 11;   % the bit width of the data variables
+DAT_FL = 8;    % the fraction length of the data variables
 DAT_S = true;  % the signedness of the data variables
 
 % the number of iterations of the CORDIC algorithm
@@ -21,7 +23,7 @@ F = fimath('OverflowAction','Saturate',...
     'CastBeforeSum', true);
 
 
-step  = 2^-6;
+step  = 2^-8;
 
 
 % input values in the range [.5, 2)
@@ -46,29 +48,25 @@ mse = mean(abs(x_ref - x_sqr_fixpt).^2);
 
 % Make a plot of the results
 figure;
-subplot(3,1,1); hold on;
+subplot(2,1,1); hold on;
 plot(v, double(x_sqr), 'r-');       % plot the floating point CORDIC
 plot(v, double(x_sqr_fixpt), 'g-'); % plot the fixed point CORDIC
 plot(v, x_ref, 'b-');               % plot the reference
 legend('CORDIC float', 'CORDIC fixpt', 'Reference', 'Location', 'SouthEast');
 title('CORDIC Square Root, CORDIC Fixed Point (In-Range) and MATLAB Reference Results');
 
-subplot(3,1,2); hold on;
+subplot(2,1,2); hold on;
 absErr_fltpt = abs(x_ref - double(x_sqr));       % compute the error in the floating point CORDIC
 absErr_fixpt = abs(x_ref - double(x_sqr_fixpt)); % compute the error in the floating point CORDIC
-plot(v, absErr_fltpt, 'r-');
-plot(v, absErr_fixpt, 'g-');
-yline(mse, 'b--');
-title('Absolute Error (vs. MATLAB SQRT Reference Results)');
-
-subplot(3,1,3); hold on;
-absErr_fltpt = abs(x_ref - double(x_sqr));       % compute the error in the floating point CORDIC
-absErr_fixpt = abs(x_ref - double(x_sqr_fixpt)); % compute the error in the floating point CORDIC
-plot(v, abs(x_ref - x_sqr_fixpt).^2, 'r-');
+plot(v, absErr_fltpt .^ 2, 'r-')
+plot(v, abs(x_ref - x_sqr_fixpt).^2, 'g-');
 yline(mse, 'b-');
 yline(3e-5, 'r--');
-title('Mean Squared Error (vs. MATLAB SQRT Reference Results)');
-legend('Squared Error', 'MSE', 'MSE Required Threshold')
+title('Floating vs Fixed Point Squared Error (vs. MATLAB SQRT Reference Results)');
+legend('', '', 'Fixpt MSE', 'MSE Required Threshold', 'Location', 'southeast')
+set(gca, 'YScale', 'log');
+
+saveas(gcf, 'CORDIC_Sqrt_Fixed_Point_Comparison.png');
 
 fprintf("Mean Squared Error between fixed point CORDIC square root and sqrt():\n --> %g\n", mse)
 

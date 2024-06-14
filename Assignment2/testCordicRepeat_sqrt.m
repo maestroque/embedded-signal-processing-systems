@@ -36,8 +36,11 @@ x_sqr_fixpt = zeros(1,length(v)); % An array to hold the fixed point cordic valu
 Nmax = 30;
 mse_n_fxpt = zeros(Nmax);
 mse_n_float = zeros(Nmax);
+
 % compute the reference floating-point results with Matlab sqrt function
-x_ref = sqrt(v);   
+x_ref = sqrt(v);  
+
+% Compute the MSE for multiple numbers of iterations of the CORDIC algorithm 
 for n_i = 1:Nmax
     % Get the CORDIC outputs for comparison
     % and plot the error between the MATLAB reference and CORDIC sqrt values
