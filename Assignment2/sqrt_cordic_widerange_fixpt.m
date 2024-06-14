@@ -1,3 +1,4 @@
+%%% REQUIRES sqrt_cordic_fixpt.m
 function r = sqrt_cordic_widerange_fixpt(v, N, DAT_BW, DAT_FL, DAT_S, F)
     % sqrt_cordic_widerange_fixpt: Calculate the square root of a number using the CORDIC algorithm
     %     and a wider range of input values.
