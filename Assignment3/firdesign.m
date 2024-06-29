@@ -22,7 +22,7 @@ wco = 2*pi*fco/fs;
 % more time to compute
 % Note that the *length* of the filter (the number of filter
 % coefficients) will be N+1
-N = 32;
+N = 103;
 
 % compute the FIR filter coefficients for a low pass filter 
 b = fir1(N, wco/pi, 'low');
@@ -36,7 +36,7 @@ H = abs(b * exp(1i * w .* (0:N)'));
 
 stable = true;
 for w_i = linspace(0.8*pi, pi, 1000)
-    if 20*log10(abs(b * exp(1i * w_i * (0:N)'))) > 20*log10(4e-3)
+    if 20*log10(abs(b * exp(1i * w_i * (0:N)'))) > 20*log10(3e-3)
         stable = false;
         break;
     end
@@ -118,6 +118,24 @@ title('Frequency response of the FIR filter');
 grid on;
 saveas(gcf, 'frequency_response.png');
 
+bitwidth = 16;
+fractional_lengths = 1:1:30
+Mean_abs_error = zeros(1,30)
+for n = 1:30  
+   bfixpt = fi(b, true, bitwidth,n);
+   rfixpt = exp(1i * w' * (0:N)) * bfixpt';
+   rfixpt_abs = abs(rfixpt);
+   Mean_abs_error(n) = mean(abs(rfixpt_abs- r_abs))
+end
+
+figure;
+plot(fractional_lengths, Mean_abs_error);
+xlabel('Fractional length');
+ylabel('Mean absolute error');
+title('finding K');
+grid on;
+
+
 % convert the (floating point) filter coefficients to
 % fixed point representation Q(16,8)
 % you may decide te modify the fixed point representation,
@@ -127,6 +145,8 @@ saveas(gcf, 'frequency_response.png');
 bitwidth = 16;       % do not change!
 fractionlength = 8;  % you may change this value
 bfixpt = fi(b, true, bitwidth, fractionlength);
+
+
 
 % the remainder of the script writes a file called
 % 'code_fragment.txt' that contains a piece of C code

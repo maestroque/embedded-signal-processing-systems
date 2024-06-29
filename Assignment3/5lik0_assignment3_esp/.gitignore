@@ -1,0 +1,8 @@
+sdkconfig.old
+sdkconfig
+.vscode/
+build/
+.cache/
+
+# For debug scripts
+*.gdb
