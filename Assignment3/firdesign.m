@@ -132,9 +132,9 @@ figure;
 plot(fractional_lengths, Mean_abs_error);
 xlabel('Fractional length');
 ylabel('Mean absolute error');
-title('finding K');
+title('Fixed point design for filter coefficients');
 grid on;
-
+saveas(gcf, 'fixed_point.png');
 
 % convert the (floating point) filter coefficients to
 % fixed point representation Q(16,8)
