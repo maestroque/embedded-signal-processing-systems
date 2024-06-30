@@ -22,7 +22,7 @@ wco = 2*pi*fco/fs;
 % more time to compute
 % Note that the *length* of the filter (the number of filter
 % coefficients) will be N+1
-N = 103;
+N = 38;
 
 % compute the FIR filter coefficients for a low pass filter 
 b = fir1(N, wco/pi, 'low');
@@ -63,7 +63,7 @@ figure;
 hold on;
 % plot(linspace(0,pi,512),20*log10(abs(H)));
 plot(w, 20*log10(H))
-yline(20*log10(4e-3), '--');
+yline(20*log10(3e-3), '--');
 xlabel('Frequency (\omega)');
 ylabel('Magnitude (dB)');
 title('Frequency response of the FIR filter');

@@ -88,7 +88,7 @@ inline static void filter_sample(filter_t *filter, int16_t left_input, int16_t r
 	/* compute the filters output */
 	int32_t accum_left = 0;
 	int32_t accum_right = 0;
-    int idx = filter->index;
+    uint32_t idx = filter->index;
 	int16_t *buffer_left = filter->buffer_left;
 	int16_t *buffer_right = filter->buffer_right;
 	for (int j = 0  ; j < FIR_FILTER_LENGTH; j++ )
@@ -102,11 +102,6 @@ inline static void filter_sample(filter_t *filter, int16_t left_input, int16_t r
             idx = FIR_FILTER_LENGTH - 1;
         }
 		filter->index = idx;
-		// if(filter->index != 0){
-		// 	filter->index --;
-		// } else {
-		// 	filter->index = FIR_FILTER_LENGTH-1;
-		// }
 	}
 
 	// divide the computed outputs according to the fixed point representation of the filter coefficients
@@ -172,6 +167,7 @@ static esp_err_t filter_process(audio_element_handle_t self, char *in, int len)
 
 	// check the time the filtering took
 	int time_us = esp_timer_get_time() - time_start;
+	ESP_LOGW(TAG, "Filtering Time: %d us", time_us);
 	// is it too much?
 	if (time_us > filter->max_us)
 	{
